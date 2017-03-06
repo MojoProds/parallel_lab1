@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-//#include <mpi.h>
+#include <mpi.h>
 
 /*** Skeleton for Lab 1 ***/
 
@@ -194,17 +194,17 @@ int main(int argc, char *argv[]) {
   check_matrix();
 
   //Initialize MPI
-  // MPI_Init(&argc, &argv);
-  // MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
-  // MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
+  MPI_Init(&argc, &argv);
+  MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
+  MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
 
-  // if(my_rank < num % comm_sz) {
-  //   my_first_i = my_rank * (num / comm_sz + 1);
-  //   my_last_i = (my_rank + 1) * (num / comm_sz + 1);
-  // } else {
-  //   my_first_i = (num % comm_sz) * (num / comm_sz + 1) + ((my_rank) - num % comm_sz) * (num / comm_sz);
-  //   my_last_i = (num % comm_sz) * (num / comm_sz + 1) + ((my_rank + 1) - num % comm_sz) * (num / comm_sz);
-  // }
+  if(my_rank < num % comm_sz) {
+    my_first_i = my_rank * (num / comm_sz + 1);
+    my_last_i = (my_rank + 1) * (num / comm_sz + 1);
+  } else {
+    my_first_i = (num % comm_sz) * (num / comm_sz + 1) + ((my_rank) - num % comm_sz) * (num / comm_sz);
+    my_last_i = (num % comm_sz) * (num / comm_sz + 1) + ((my_rank + 1) - num % comm_sz) * (num / comm_sz);
+  }
 
   float *new = (float *) malloc(num * sizeof(float));
   if( !new) {
@@ -243,7 +243,7 @@ int main(int argc, char *argv[]) {
  
   printf("total number of iterations: %d\n", nit);
 
-  //MPI_Finalize();
+  MPI_Finalize();
 
   exit(0);
 }
