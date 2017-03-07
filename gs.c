@@ -264,17 +264,17 @@ int main(int argc, char *argv[]) {
 
       for(int i = my_first_i; i < my_last_i; i++) {
         new[i] = calc_unknown(i + 1);
-        printf("%f\n", calc_unknown(i + 1));
+        //printf("%f\n", calc_unknown(i + 1));
       }
 
       for(int i = my_first_i; i < my_last_i; i++) {
         if(within_error(new[i], x[i]) == 0) {
-          //printf("break\n");
+          printf("break\n");
           break;
         }
         if(i == my_last_i - 1) {
           procs_done[0] = 1;
-          //printf("Process %d done\n", my_rank);
+          printf("Process %d done\n", my_rank);
         }
       }
 
@@ -294,6 +294,7 @@ int main(int argc, char *argv[]) {
         }
         if(i == comm_sz - 1) {
           all_done = 1;
+          printf("All done\n");
         }
       }
     }
