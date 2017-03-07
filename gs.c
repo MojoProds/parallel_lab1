@@ -68,7 +68,7 @@ void check_matrix() {
 
     if( aii < sum) {
       printf("The matrix will not converge.\n");
-      exit(1);
+      //exit(1);
     }
     
     if(aii > sum) {
@@ -78,7 +78,7 @@ void check_matrix() {
   
   if( !bigger ) {
     printf("The matrix will not converge\n");
-    exit(1);
+    //exit(1);
   }
 }
 
@@ -99,7 +99,7 @@ void get_input(char filename[]) {
   fp = fopen(filename, "r");
   if(!fp) {
     printf("Cannot open file %s\n", filename);
-    exit(1);
+    //exit(1);
   }
 
   fscanf(fp,"%d ",&num);
@@ -109,28 +109,28 @@ void get_input(char filename[]) {
   a = (float**)malloc(num * sizeof(float*));
   if( !a) {
     printf("Cannot allocate a!\n");
-    exit(1);
+    //exit(1);
   }
 
   for(i = 0; i < num; i++) {
     a[i] = (float *)malloc(num * sizeof(float)); 
     if( !a[i]) {
 		  printf("Cannot allocate a[%d]!\n",i);
-		  exit(1);
+		  //exit(1);
   	}
   }
  
   x = (float *) malloc(num * sizeof(float));
   if( !x) {
     printf("Cannot allocate x!\n");
-    exit(1);
+    //exit(1);
   }
 
 
   b = (float *) malloc(num * sizeof(float));
   if( !b) {
     printf("Cannot allocate b!\n");
-    exit(1);
+    //exit(1);
   }
 
   /* Now .. Filling the blanks */ 
