@@ -244,7 +244,7 @@ int main(int argc, char *argv[]) {
         exit(1);
       }
 
-      int done = 0;
+      procs_done[0] = 0;
 
       my_first_i = my_rank * (num / comm_sz);
       my_last_i = (my_rank + 1) * (num / comm_sz);
