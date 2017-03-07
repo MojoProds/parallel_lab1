@@ -199,7 +199,7 @@ int main(int argc, char *argv[]) {
   MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
   local_num = num / comm_sz;
 
-  print("MPI started");
+  printf("MPI started");
 
   do {
     if(my_rank != 0) {
