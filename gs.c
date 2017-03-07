@@ -287,6 +287,7 @@ int main(int argc, char *argv[]) {
       //printf("Still good ERROR CHECK\n");
 
       float *temp;
+      int status;
 
       for(int p = 1; p < comm_sz; p++) {
         MPI_Recv(&temp/*&new + (sizeof(float) * local_num * p)*/, local_num, MPI_FLOAT, p, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
@@ -295,7 +296,8 @@ int main(int argc, char *argv[]) {
         //   new[i] = temp[counter];
         //   counter++;
         // }
-        MPI_Recv(&procs_done + (sizeof(int) * p), 1, MPI_INT, p, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        MPI_Recv(&status, 1, MPI_INT, p, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        procs_done[p] = status;
         printf("Received\n");
       }
 
