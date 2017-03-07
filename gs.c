@@ -251,16 +251,19 @@ int main(int argc, char *argv[]) {
 
       printf("my_first_i: %d\nmy_last_i: %d\n", my_first_i, my_last_i);
 
-      for(int i = 0; i < num; i++) {
+      for(int i = my_first_i; i < my_last_i; i++) {
         new[i] = calc_unknown(i + 1);
+        printf("%f\n", calc_unknown(i + 1));
       }
 
       for(int i = my_first_i; i < my_last_i; i++) {
         if(within_error(new[i], x[i]) == 0) {
+          printf("break\n");
           break;
         }
         if(i == my_last_i - 1) {
           procs_done[0] = 1;
+          printf("Process %d done\n", my_rank);
         }
       }
 
