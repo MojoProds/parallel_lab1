@@ -229,7 +229,7 @@ int main(int argc, char *argv[]) {
 
       MPI_Send(&local_new, local_num, MPI_FLOAT, 0, 0, MPI_COMM_WORLD);
       MPI_Send(&done, 1, MPI_INT, 0, 1, MPI_COMM_WORLD);
-      printf("Sent\n");
+      printf("Sent from process %d\n", my_rank);
 
     } else {
 
