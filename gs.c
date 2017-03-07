@@ -238,7 +238,7 @@ int main(int argc, char *argv[]) {
       }
 
       //printf("Still good\n");
-
+      printf("Sending: %f\n", *(&local_new));
       MPI_Ssend(&local_new, local_num, MPI_FLOAT, 0, 0, MPI_COMM_WORLD);
       MPI_Ssend(&done, 1, MPI_INT, 0, 1, MPI_COMM_WORLD);
       //printf("Sent from process %d\n", my_rank);
