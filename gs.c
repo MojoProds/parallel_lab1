@@ -272,6 +272,7 @@ int main(int argc, char *argv[]) {
       printf("Still good CALCS\n");
 
       for(int i = my_first_i; i < my_last_i; i++) {
+        printf("X[%d] = %f\n", i, new[i]);
         if(within_error(new[i], x[i]) == 0) {
           printf("break\n");
           break;
@@ -310,7 +311,6 @@ int main(int argc, char *argv[]) {
       printf("Still good CHECK ALL DONE\n");
 
     }
-    printf("All done: %d\n", all_done);
     nit++;
   } while(all_done != 1);
 
