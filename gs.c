@@ -300,7 +300,7 @@ int main(int argc, char *argv[]) {
     }
     printf("All done: %d\n", all_done);
     nit++;
-  } while(all_done == 0);
+  } while(all_done != 1);
 
   MPI_Finalize();
 
