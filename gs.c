@@ -218,16 +218,16 @@ int main(int argc, char *argv[]) {
       //printf("my_first_i: %d\nmy_last_i: %d\n", my_first_i, my_last_i);
       int counter = 0;
       for(int i = my_first_i; i < my_last_i; i++) {
-        printf("Still good %f\n", calc_unknown(i + 1));
+        //printf("Still good %f\n", calc_unknown(i + 1));
         local_new[counter] = calc_unknown(i + 1);
-        printf("Still good LOCAL %f\n", local_new[counter]);
+        //printf("Still good LOCAL %f\n", local_new[counter]);
         counter++;
       }
 
       //printf("Still good\n");
       counter = 0;
       for(int i = my_first_i; i < my_last_i; i++) {
-        printf("X[%d] = %f\n", i, local_new[counter]);
+        //printf("X[%d] = %f\n", i, local_new[counter]);
         if(within_error(local_new[counter], x[i]) == 0) {
           break;
         }
@@ -296,6 +296,7 @@ int main(int argc, char *argv[]) {
       printf("Still good RECVS\n");
 
       for(int i = 0; i < num; i++) {
+        printf("Received new[%d] = %f done\n", i, new[i]);
         x[i] = new[i];
       }
 
