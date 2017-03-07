@@ -201,6 +201,7 @@ int main(int argc, char *argv[]) {
 
   do {
     if(my_rank != 0) {
+      printf("Enter Process %d\n", my_rank);
       int done = 0;
 
       float *local_new = (float *) malloc(local_num * sizeof(float));
