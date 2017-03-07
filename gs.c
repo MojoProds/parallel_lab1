@@ -225,7 +225,7 @@ int main(int argc, char *argv[]) {
         }
       }
 
-      MPI_Send(&new, local_num, MPI_FLOAT, 0, 0, MPI_COMM_WORLD);
+      MPI_Send(&local_new, local_num, MPI_FLOAT, 0, 0, MPI_COMM_WORLD);
       MPI_Send(&done, 1, MPI_INT, 0, 1, MPI_COMM_WORLD);
 
     } else {
@@ -236,7 +236,7 @@ int main(int argc, char *argv[]) {
         exit(1);
       }
 
-      float *procs_done = (int *) malloc(comm_sz * sizeof(int));
+      int *procs_done = (int *) malloc(comm_sz * sizeof(int));
       if( !procs_done) {
         printf("Cannot allocate processes done!\n");
         exit(1);
@@ -262,7 +262,7 @@ int main(int argc, char *argv[]) {
 
       for(int p = 1; p < comm_sz; p++) {
         MPI_Recv(&new + (sizeof(float) * local_num * p), local_num, MPI_FLOAT, p, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        MPI_Send(&procs_done + (sizeof(int) * p), 1, MPI_INT, p, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        MPI_Recv(&procs_done + (sizeof(int) * p), 1, MPI_INT, p, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
       }
 
       for(int i = 0; i < num; i++) {
