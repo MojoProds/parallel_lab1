@@ -225,15 +225,16 @@ int main(int argc, char *argv[]) {
       }
 
       //printf("Still good\n");
-
+      counter = 0;
       for(int i = my_first_i; i < my_last_i; i++) {
-        printf("X[%d] = %f\n", i, local_new[i]);
-        if(within_error(local_new[i], x[i]) == 0) {
+        printf("X[%d] = %f\n", i, local_new[counter]);
+        if(within_error(local_new[counter], x[i]) == 0) {
           break;
         }
         if(i == my_last_i - 1) {
           done = 1;
         }
+        counter++;
       }
 
       //printf("Still good\n");
