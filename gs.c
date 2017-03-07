@@ -212,7 +212,7 @@ int main(int argc, char *argv[]) {
       my_first_i = my_rank * local_num;
       my_last_i = (my_rank + 1) * local_num;
 
-      printf("my_first_i: %d\nmy_last_i: %d\n", my_first_i, my_last_i);
+      //printf("my_first_i: %d\nmy_last_i: %d\n", my_first_i, my_last_i);
 
       for(int i = my_first_i; i <= my_last_i; i++) {
         local_new[i] = calc_unknown(i + 1);
@@ -229,6 +229,7 @@ int main(int argc, char *argv[]) {
 
       MPI_Send(&local_new, local_num, MPI_FLOAT, 0, 0, MPI_COMM_WORLD);
       MPI_Send(&done, 1, MPI_INT, 0, 1, MPI_COMM_WORLD);
+      printf("Sent\n");
 
     } else {
 
@@ -249,7 +250,7 @@ int main(int argc, char *argv[]) {
       my_first_i = my_rank * (num / comm_sz);
       my_last_i = (my_rank + 1) * (num / comm_sz);
 
-      printf("my_first_i: %d\nmy_last_i: %d\n", my_first_i, my_last_i);
+      //printf("my_first_i: %d\nmy_last_i: %d\n", my_first_i, my_last_i);
 
       for(int i = my_first_i; i < my_last_i; i++) {
         new[i] = calc_unknown(i + 1);
@@ -258,12 +259,12 @@ int main(int argc, char *argv[]) {
 
       for(int i = my_first_i; i < my_last_i; i++) {
         if(within_error(new[i], x[i]) == 0) {
-          printf("break\n");
+          //printf("break\n");
           break;
         }
         if(i == my_last_i - 1) {
           procs_done[0] = 1;
-          printf("Process %d done\n", my_rank);
+          //printf("Process %d done\n", my_rank);
         }
       }
 
