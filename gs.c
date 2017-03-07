@@ -175,7 +175,7 @@ int main(int argc, char *argv[]) {
   int i;
   int nit = 0; /* number of iterations */
   int comm_sz, my_rank, my_first_i, my_last_i, local_num;
-  int all_done;
+  int all_done = 0;
 
   
   if( argc != 2) {
