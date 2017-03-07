@@ -227,6 +227,7 @@ int main(int argc, char *argv[]) {
       //printf("Still good\n");
 
       for(int i = my_first_i; i < my_last_i; i++) {
+        printf("X[%d] = %f\n", i, local_new[i]);
         if(within_error(local_new[i], x[i]) == 0) {
           break;
         }
