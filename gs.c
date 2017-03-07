@@ -193,6 +193,8 @@ int main(int argc, char *argv[]) {
    */
   check_matrix();
 
+  printf("MPI not started yet");
+
   //Initialize MPI
   MPI_Init(NULL, NULL);
   MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
