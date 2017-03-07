@@ -218,9 +218,9 @@ int main(int argc, char *argv[]) {
       //printf("my_first_i: %d\nmy_last_i: %d\n", my_first_i, my_last_i);
       int counter = 0;
       for(int i = my_first_i; i < my_last_i; i++) {
-        //printf("Still good\n");
+        printf("Still good %f\n", calc_unknown(i + 1));
         local_new[counter] = calc_unknown(i + 1);
-        //printf("Still good\n");
+        /printf("Still good LOCAL %f\n", local_new[counter]);
         counter++;
       }
 
