@@ -293,7 +293,7 @@ int main(int argc, char *argv[]) {
         MPI_Recv(temp/*&new + (sizeof(float) * local_num * p)*/, local_num, MPI_FLOAT, p, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         int counter = 0;
         for(int i = local_num * p; i < local_num * (p + 1); i++) {
-          new[i] = (temp + sizeof(float) * counter);
+          new[i] = *(temp + sizeof(float) * counter);
           counter++;
         }
         MPI_Recv(&status, 1, MPI_INT, p, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
