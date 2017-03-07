@@ -199,6 +199,8 @@ int main(int argc, char *argv[]) {
   MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
   local_num = num / comm_sz;
 
+  print("MPI started");
+
   do {
     if(my_rank != 0) {
       int done = 0;
@@ -278,6 +280,8 @@ int main(int argc, char *argv[]) {
         }
       }
     }
+
+    nit++;
   } while(all_done == 0);
 
   MPI_Finalize();
