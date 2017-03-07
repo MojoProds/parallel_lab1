@@ -201,7 +201,7 @@ int main(int argc, char *argv[]) {
 
   do {
     if(my_rank != 0) {
-      printf("Enter Process %d\n", my_rank);
+      //printf("Enter Process %d\n", my_rank);
       int done = 0;
 
       float *local_new = (float *) malloc(local_num * sizeof(float));
@@ -215,7 +215,7 @@ int main(int argc, char *argv[]) {
       my_first_i = my_rank * local_num;
       my_last_i = (my_rank + 1) * local_num;
 
-      printf("my_first_i: %d\nmy_last_i: %d\n", my_first_i, my_last_i);
+      //printf("my_first_i: %d\nmy_last_i: %d\n", my_first_i, my_last_i);
       int counter = 0;
       for(int i = my_first_i; i < my_last_i; i++) {
         //printf("Still good\n");
@@ -239,7 +239,7 @@ int main(int argc, char *argv[]) {
 
       MPI_Send(&local_new, local_num, MPI_FLOAT, 0, 0, MPI_COMM_WORLD);
       MPI_Send(&done, 1, MPI_INT, 0, 1, MPI_COMM_WORLD);
-      printf("Sent from process %d\n", my_rank);
+      //printf("Sent from process %d\n", my_rank);
 
     } else {
 
