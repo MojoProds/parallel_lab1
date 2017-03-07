@@ -172,7 +172,7 @@ int within_error(float newVal, float oldVal) {
 
 int main(int argc, char *argv[]) {
 
-  printf("-->Main started<--");
+  printf("-->Main started<--\n");
 
   int i;
   int nit = 0; /* number of iterations */
@@ -195,7 +195,7 @@ int main(int argc, char *argv[]) {
    */
   check_matrix();
 
-  printf("-->MPI not started yet<--");
+  printf("-->MPI not started yet<--\n");
 
   //Initialize MPI
   MPI_Init(NULL, NULL);
@@ -203,7 +203,7 @@ int main(int argc, char *argv[]) {
   MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
   local_num = num / comm_sz;
 
-  printf("-->MPI started<--");
+  printf("-->MPI started<--\n");
 
   do {
     if(my_rank != 0) {
