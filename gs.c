@@ -174,7 +174,7 @@ int main(int argc, char *argv[]) {
 
   int i;
   int nit = 0; /* number of iterations */
-  int comm_sz, my_rank, my_first_i, my_last_i;
+  int comm_sz, my_rank, my_first_i, my_last_i, local_num;
   int done;
 
   
@@ -197,44 +197,67 @@ int main(int argc, char *argv[]) {
   MPI_Init(&argc, &argv);
   MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
   MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
+  local_num = num / comm_sz;
 
-  if(my_rank < num % comm_sz) {
-    my_first_i = my_rank * (num / comm_sz + 1);
-    my_last_i = (my_rank + 1) * (num / comm_sz + 1);
-  } else {
-    my_first_i = (num % comm_sz) * (num / comm_sz + 1) + ((my_rank) - num % comm_sz) * (num / comm_sz);
-    my_last_i = (num % comm_sz) * (num / comm_sz + 1) + ((my_rank + 1) - num % comm_sz) * (num / comm_sz);
-  }
 
-  float *new = (float *) malloc(num * sizeof(float));
-  if( !new) {
-    printf("Cannot allocate new!\n");
-    exit(1);
-  }
+  if(my_rank != 0) {
+    done = 0;
 
-  done = 0;
-
-  do{
-    for(int i = 0; i < num; i++) {
-      new[i] = calc_unknown(i + 1);
+    float *local_new = (float *) malloc(local_num * sizeof(float));
+    if( !local_new) {
+      printf("Cannot allocate local new!\n");
+      exit(1);
     }
 
-    for(int i = 0; i < num; i++) {
-      if(within_error(new[i], x[i]) == 0) {
+    my_first_i = my_rank * local_num;
+    my_last_i = (my_rank + 1) * local_num;
+
+    for(int i = my_first_i; i <= my_last_i; i++) {
+      local_new[i] = calc_unknown(i + 1);
+    }
+
+    for(int i = my_last_i; i < my_last_i; i++) {
+      if(within_error(local_new[i], x[i]) == 0) {
         break;
       }
-      if(i == num - 1) {
+      if(i == my_last_i - 1) {
         done = 1;
       }
     }
 
-    for(int i = 0; i < num; i++) {
-      x[i] = new[i];
+    MPI_Send(&new, local_num, MPI_FLOAT, 0, 0, MPI_COMM_WORLD);
+
+  } else {
+
+    float *new = (float *) malloc(num * sizeof(float));
+    if( !new) {
+      printf("Cannot allocate new!\n");
+      exit(1);
     }
 
-    nit++;
-  } while (done == 0);
- 
+    done = 0;
+
+    my_first_i = my_rank * (num / comm_sz);
+    my_last_i = (my_rank + 1) * (num / comm_sz);
+
+    for(int i = 0; i < num; i++) {
+      new[i] = calc_unknown(i + 1);
+    }
+
+    for(int i = my_last_i; i < my_last_i; i++) {
+      if(within_error(new[i], x[i]) == 0) {
+        break;
+      }
+      if(i == my_last_i - 1) {
+        done = 1;
+      }
+    }
+
+    for(int p = 1; p < comm_sz; p++) {
+      MPI_Recv(&new, local_num, MPI_FLOAT, p, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    }
+
+  }
   /* Writing to the stdout */
   /* Keep that same format */
   for(int i = 0; i < num; i++) {
