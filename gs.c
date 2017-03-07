@@ -180,7 +180,7 @@ int main(int argc, char *argv[]) {
   
   if( argc != 2) {
     printf("Usage: gsref filename\n");
-    exit(1);
+    //exit(1);
   }
   
   /* Read the input file and fill the global data structure above */ 
@@ -206,7 +206,7 @@ int main(int argc, char *argv[]) {
       float *local_new = (float *) malloc(local_num * sizeof(float));
       if( !local_new) {
         printf("Cannot allocate local new!\n");
-        exit(1);
+        //exit(1);
       }
 
       my_first_i = my_rank * local_num;
@@ -233,13 +233,13 @@ int main(int argc, char *argv[]) {
       float *new = (float *) malloc(num * sizeof(float));
       if( !new) {
         printf("Cannot allocate new!\n");
-        exit(1);
+        //exit(1);
       }
 
       int *procs_done = (int *) malloc(comm_sz * sizeof(int));
       if( !procs_done) {
         printf("Cannot allocate processes done!\n");
-        exit(1);
+        //exit(1);
       }
 
       int done = 0;
