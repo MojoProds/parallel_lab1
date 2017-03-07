@@ -215,7 +215,7 @@ int main(int argc, char *argv[]) {
       my_first_i = my_rank * local_num;
       my_last_i = (my_rank + 1) * local_num;
 
-      //printf("my_first_i: %d\nmy_last_i: %d\n", my_first_i, my_last_i);
+      printf("my_first_i: %d\nmy_last_i: %d\n", my_first_i, my_last_i);
       int counter = 0;
       for(int i = my_first_i; i <= my_last_i; i++) {
         local_new[counter] = calc_unknown(i + 1);
