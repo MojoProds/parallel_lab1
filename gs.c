@@ -220,7 +220,7 @@ int main(int argc, char *argv[]) {
       for(int i = my_first_i; i < my_last_i; i++) {
         printf("Still good %f\n", calc_unknown(i + 1));
         local_new[counter] = calc_unknown(i + 1);
-        /printf("Still good LOCAL %f\n", local_new[counter]);
+        printf("Still good LOCAL %f\n", local_new[counter]);
         counter++;
       }
 
