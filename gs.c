@@ -264,7 +264,7 @@ int main(int argc, char *argv[]) {
       my_first_i = my_rank * (num / comm_sz);
       my_last_i = (my_rank + 1) * (num / comm_sz);
 
-      printf("Still good RANK\n");
+      //printf("Still good RANK\n");
 
       //printf("my_first_i: %d\nmy_last_i: %d\n", my_first_i, my_last_i);
 
@@ -273,21 +273,18 @@ int main(int argc, char *argv[]) {
         //printf("%f\n", calc_unknown(i + 1));
       }
 
-      printf("Still good CALCS\n");
+      //printf("Still good CALCS\n");
 
       for(int i = my_first_i; i < my_last_i; i++) {
-        printf("X[%d] = %f\n", i, new[i]);
         if(within_error(new[i], x[i]) == 0) {
-          printf("break\n");
           break;
         }
         if(i == my_last_i - 1) {
           procs_done[0] = 1;
-          printf("Process %d done\n", my_rank);
         }
       }
 
-      printf("Still good ERROR CHECK\n");
+      //printf("Still good ERROR CHECK\n");
 
       for(int p = 1; p < comm_sz; p++) {
         MPI_Recv(&new + (sizeof(float) * local_num * p), local_num, MPI_FLOAT, p, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
@@ -295,16 +292,17 @@ int main(int argc, char *argv[]) {
         printf("Received\n");
       }
 
-      printf("Still good RECVS\n");
+      //printf("Still good RECVS\n");
 
       for(int i = 0; i < num; i++) {
         printf("Received new[%d] = %f done\n", i, new[i]);
         x[i] = new[i];
       }
 
-      printf("Still good UPDATE X\n");
+      //printf("Still good UPDATE X\n");
 
       for(int i = 0; i < comm_sz; i++) {
+        printf("Process %d done: %d\n", i, procs_done[i]);
         if(procs_done[i] == 0) {
           break;
         }
