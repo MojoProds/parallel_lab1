@@ -210,6 +210,8 @@ int main(int argc, char *argv[]) {
         exit(1);
       }
 
+      printf("Still good\n");
+
       my_first_i = my_rank * local_num;
       my_last_i = (my_rank + 1) * local_num;
 
@@ -219,6 +221,8 @@ int main(int argc, char *argv[]) {
         local_new[i] = calc_unknown(i + 1);
       }
 
+      printf("Still good\n");
+
       for(int i = my_first_i; i < my_last_i; i++) {
         if(within_error(local_new[i], x[i]) == 0) {
           break;
@@ -227,6 +231,8 @@ int main(int argc, char *argv[]) {
           done = 1;
         }
       }
+
+      printf("Still good\n");
 
       MPI_Send(&local_new, local_num, MPI_FLOAT, 0, 0, MPI_COMM_WORLD);
       MPI_Send(&done, 1, MPI_INT, 0, 1, MPI_COMM_WORLD);
