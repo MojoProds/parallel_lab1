@@ -210,7 +210,7 @@ int main(int argc, char *argv[]) {
         exit(1);
       }
 
-      printf("Still good\n");
+      //printf("Still good\n");
 
       my_first_i = my_rank * local_num;
       my_last_i = (my_rank + 1) * local_num;
@@ -218,13 +218,13 @@ int main(int argc, char *argv[]) {
       printf("my_first_i: %d\nmy_last_i: %d\n", my_first_i, my_last_i);
       int counter = 0;
       for(int i = my_first_i; i < my_last_i; i++) {
-        printf("Still good\n");
+        //printf("Still good\n");
         local_new[counter] = calc_unknown(i + 1);
-        printf("Still good\n");
+        //printf("Still good\n");
         counter++;
       }
 
-      printf("Still good\n");
+      //printf("Still good\n");
 
       for(int i = my_first_i; i < my_last_i; i++) {
         if(within_error(local_new[i], x[i]) == 0) {
@@ -235,7 +235,7 @@ int main(int argc, char *argv[]) {
         }
       }
 
-      printf("Still good\n");
+      //printf("Still good\n");
 
       MPI_Send(&local_new, local_num, MPI_FLOAT, 0, 0, MPI_COMM_WORLD);
       MPI_Send(&done, 1, MPI_INT, 0, 1, MPI_COMM_WORLD);
@@ -260,12 +260,16 @@ int main(int argc, char *argv[]) {
       my_first_i = my_rank * (num / comm_sz);
       my_last_i = (my_rank + 1) * (num / comm_sz);
 
+      printf("Still good RANK\n");
+
       //printf("my_first_i: %d\nmy_last_i: %d\n", my_first_i, my_last_i);
 
       for(int i = my_first_i; i < my_last_i; i++) {
         new[i] = calc_unknown(i + 1);
         //printf("%f\n", calc_unknown(i + 1));
       }
+
+      printf("Still good CALCS\n");
 
       for(int i = my_first_i; i < my_last_i; i++) {
         if(within_error(new[i], x[i]) == 0) {
@@ -278,15 +282,21 @@ int main(int argc, char *argv[]) {
         }
       }
 
+      printf("Still good ERROR CHECK\n");
+
       for(int p = 1; p < comm_sz; p++) {
         MPI_Recv(&new + (sizeof(float) * local_num * p), local_num, MPI_FLOAT, p, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         MPI_Recv(&procs_done + (sizeof(int) * p), 1, MPI_INT, p, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         printf("Received\n");
       }
 
+      printf("Still good RECVS\n");
+
       for(int i = 0; i < num; i++) {
         x[i] = new[i];
       }
+
+      printf("Still good UPDATE X\n");
 
       for(int i = 0; i < comm_sz; i++) {
         if(procs_done[i] == 0) {
@@ -297,6 +307,8 @@ int main(int argc, char *argv[]) {
           printf("All done\n");
         }
       }
+      printf("Still good CHECK ALL DONE\n");
+
     }
     printf("All done: %d\n", all_done);
     nit++;
