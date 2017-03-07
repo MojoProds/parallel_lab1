@@ -212,7 +212,7 @@ int main(int argc, char *argv[]) {
       my_first_i = my_rank * local_num;
       my_last_i = (my_rank + 1) * local_num;
 
-      printf("my_first_i: " + my_first_i + "\nmy_last_i: " + my_last_i + "\n");
+      printf("my_first_i: %d\nmy_last_i: %d\n", my_first_i, my_last_i);
 
       for(int i = my_first_i; i <= my_last_i; i++) {
         local_new[i] = calc_unknown(i + 1);
@@ -249,7 +249,7 @@ int main(int argc, char *argv[]) {
       my_first_i = my_rank * (num / comm_sz);
       my_last_i = (my_rank + 1) * (num / comm_sz);
 
-      printf("my_first_i: " + my_first_i + "\nmy_last_i: " + my_last_i + "\n");
+      printf("my_first_i: %d\nmy_last_i: %d\n", my_first_i, my_last_i);
 
       for(int i = 0; i < num; i++) {
         new[i] = calc_unknown(i + 1);
