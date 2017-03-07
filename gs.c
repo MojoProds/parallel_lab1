@@ -298,7 +298,7 @@ int main(int argc, char *argv[]) {
         }
       }
     }
-
+    printf("All done: %d\n", all_done);
     nit++;
   } while(all_done == 0);
 
