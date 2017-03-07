@@ -271,6 +271,7 @@ int main(int argc, char *argv[]) {
       for(int p = 1; p < comm_sz; p++) {
         MPI_Recv(&new + (sizeof(float) * local_num * p), local_num, MPI_FLOAT, p, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         MPI_Recv(&procs_done + (sizeof(int) * p), 1, MPI_INT, p, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        printf("Received\n");
       }
 
       for(int i = 0; i < num; i++) {
