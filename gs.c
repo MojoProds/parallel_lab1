@@ -172,8 +172,6 @@ int within_error(float newVal, float oldVal) {
 
 int main(int argc, char *argv[]) {
 
-  printf("-->Main started<--\n");
-
   int i;
   int nit = 0; /* number of iterations */
   int comm_sz, my_rank, my_first_i, my_last_i, local_num;
@@ -195,15 +193,11 @@ int main(int argc, char *argv[]) {
    */
   check_matrix();
 
-  printf("-->MPI not started yet<--\n");
-
   //Initialize MPI
-  MPI_Init(NULL, NULL);
+  MPI_Init(&argc, &argv);
   MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
   MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
   local_num = num / comm_sz;
-
-  printf("-->MPI started<--\n");
 
   do {
     if(my_rank != 0) {
@@ -217,6 +211,8 @@ int main(int argc, char *argv[]) {
 
       my_first_i = my_rank * local_num;
       my_last_i = (my_rank + 1) * local_num;
+
+      printf("my_first_i: " + my_first_i + "\nmy_last_i: " + my_last_i + "\n");
 
       for(int i = my_first_i; i <= my_last_i; i++) {
         local_new[i] = calc_unknown(i + 1);
@@ -252,6 +248,8 @@ int main(int argc, char *argv[]) {
 
       my_first_i = my_rank * (num / comm_sz);
       my_last_i = (my_rank + 1) * (num / comm_sz);
+
+      printf("my_first_i: " + my_first_i + "\nmy_last_i: " + my_last_i + "\n");
 
       for(int i = 0; i < num; i++) {
         new[i] = calc_unknown(i + 1);
