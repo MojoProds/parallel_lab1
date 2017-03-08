@@ -304,7 +304,7 @@ int main(int argc, char *argv[]) {
       //printf("Still good RECVS\n");
 
       for(int i = 0; i < num; i++) {
-        printf("Received new[%d] = %f done\n", i, new[i]);
+        printf("Received new[%d] = %f\n", i, new[i]);
         x[i] = new[i];
       }
 
@@ -323,6 +323,9 @@ int main(int argc, char *argv[]) {
       //printf("Still good CHECK ALL DONE\n");
       nit++;
     }
+
+    MPI_Barrier();
+
   } while(all_done != 1);
 
   MPI_Finalize();
