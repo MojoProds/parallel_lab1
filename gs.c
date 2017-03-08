@@ -242,6 +242,15 @@ int main(int argc, char *argv[]) {
 
       MPI_Send(local_new, local_num, MPI_FLOAT, 0, 0, MPI_COMM_WORLD);
       MPI_Send(&done, 1, MPI_INT, 0, 1, MPI_COMM_WORLD);
+
+      float replace[num];
+
+      MPI_Recv(replace, num, MPI_FLOAT, 0, 2, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+
+      for(int i = 0; i < num; i++) {
+        x[i] = replace[i];
+      }
+
       //printf("Sent from process %d\n", my_rank);
 
     } else {
@@ -307,6 +316,8 @@ int main(int argc, char *argv[]) {
         printf("Received new[%d] = %f\n", i, new[i]);
         x[i] = new[i];
       }
+
+      MPI_Bcast(x, num, MPI_FLOAT, 0, MPI_COMM_WORLD);
 
       //printf("Still good UPDATE X\n");
 
