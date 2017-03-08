@@ -335,7 +335,7 @@ int main(int argc, char *argv[]) {
       nit++;
     }
 
-    MPI_Barrier(MPI_COMM_WORLD);
+    //MPI_Barrier(MPI_COMM_WORLD);
 
   } while(all_done != 1);
 
