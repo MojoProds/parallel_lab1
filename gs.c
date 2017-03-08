@@ -240,10 +240,6 @@ int main(int argc, char *argv[]) {
         counter++;
       }
 
-      //printf("Still good\n");
-      // printf("Sending: %f\n", *(&local_new));
-      // printf("Sending: %f\n", local_new[0]);
-      printf("Sending: %f\n", (local_new[0]));
       MPI_Ssend(local_new, local_num, MPI_FLOAT, 0, 0, MPI_COMM_WORLD);
       MPI_Ssend(&done, 1, MPI_INT, 0, 1, MPI_COMM_WORLD);
       //printf("Sent from process %d\n", my_rank);
@@ -295,8 +291,7 @@ int main(int argc, char *argv[]) {
       int status;
 
       for(int p = 1; p < comm_sz; p++) {
-        MPI_Recv(temp/*&new + (sizeof(float) * local_num * p)*/, local_num, MPI_FLOAT, p, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        printf("Recieved: %f\n", temp[0]);
+        MPI_Recv(temp, local_num, MPI_FLOAT, p, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         int counter = 0;
         for(int i = local_num * p; i < local_num * (p + 1); i++) {
           new[i] = temp[counter];
@@ -325,7 +320,7 @@ int main(int argc, char *argv[]) {
           printf("All done\n");
         }
       }
-      printf("Still good CHECK ALL DONE\n");
+      //printf("Still good CHECK ALL DONE\n");
 
     }
     nit++;
