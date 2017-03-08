@@ -200,6 +200,9 @@ int main(int argc, char *argv[]) {
   local_num = num / comm_sz;
 
   do {
+
+    /****OTHER PROCESSES****/
+
     if(my_rank != 0) {
       //printf("Enter Process %d\n", my_rank);
       int done = 0;
@@ -241,11 +244,13 @@ int main(int argc, char *argv[]) {
       // printf("Sending: %f\n", *(&local_new));
       // printf("Sending: %f\n", local_new[0]);
       printf("Sending: %d\n", (&local_new[0]));
-      MPI_Ssend(&local_new[0], local_num, MPI_FLOAT, 0, 0, MPI_COMM_WORLD);
+      MPI_Ssend(&local_new, local_num, MPI_FLOAT, 0, 0, MPI_COMM_WORLD);
       MPI_Ssend(&done, 1, MPI_INT, 0, 1, MPI_COMM_WORLD);
       //printf("Sent from process %d\n", my_rank);
 
     } else {
+
+      /****MAIN PROCESS****/
 
       float *new = (float *) malloc(num * sizeof(float));
       if( !new) {
@@ -286,14 +291,14 @@ int main(int argc, char *argv[]) {
 
       //printf("Still good ERROR CHECK\n");
 
-      int *temp = 0;
+      int *temp;
       int status;
 
       for(int p = 1; p < comm_sz; p++) {
         MPI_Recv(temp/*&new + (sizeof(float) * local_num * p)*/, local_num, MPI_FLOAT, p, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
         int counter = 0;
         for(int i = local_num * p; i < local_num * (p + 1); i++) {
-          new[i] = *(temp + sizeof(float) * counter);
+          new[i] = temp[i]/**(temp + sizeof(float) * counter)*/;
           counter++;
         }
         MPI_Recv(&status, 1, MPI_INT, p, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
