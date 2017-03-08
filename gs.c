@@ -299,7 +299,7 @@ int main(int argc, char *argv[]) {
         printf("Recieved: %d\n", temp);
         int counter = 0;
         for(int i = local_num * p; i < local_num * (p + 1); i++) {
-          //new[i] = temp[i]/**(temp + sizeof(float) * counter)*/;
+          new[i] = temp[counter]/**(temp + sizeof(float) * counter)*/;
           //printf("temp: %f\n", *(temp + counter));
           counter++;
         }
