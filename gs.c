@@ -300,7 +300,7 @@ int main(int argc, char *argv[]) {
         int counter = 0;
         for(int i = local_num * p; i < local_num * (p + 1); i++) {
           //new[i] = temp[i]/**(temp + sizeof(float) * counter)*/;
-          printf("temp: %f\n", temp[i]);
+          printf("temp: %f\n", *(temp + i));
           counter++;
         }
         MPI_Recv(&status, 1, MPI_INT, p, 1, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
