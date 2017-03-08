@@ -194,12 +194,14 @@ int main(int argc, char *argv[]) {
   check_matrix();
 
   //Initialize MPI
-  MPI_Init(&argc, &argv);
-  MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
-  MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-  local_num = num / comm_sz;
+  
 
   do {
+
+    MPI_Init(&argc, &argv);
+    MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
+    MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
+    local_num = num / comm_sz;
 
     /****OTHER PROCESSES****/
 
@@ -323,10 +325,11 @@ int main(int argc, char *argv[]) {
       //printf("Still good CHECK ALL DONE\n");
 
     }
+
+    MPI_Finalize();
+
     nit++;
   } while(all_done != 1);
-
-  MPI_Finalize();
 
   /* Writing to the stdout */
   /* Keep that same format */
