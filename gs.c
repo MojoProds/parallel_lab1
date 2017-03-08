@@ -240,8 +240,8 @@ int main(int argc, char *argv[]) {
         counter++;
       }
 
-      MPI_Ssend(local_new, local_num, MPI_FLOAT, 0, 0, MPI_COMM_WORLD);
-      MPI_Ssend(&done, 1, MPI_INT, 0, 1, MPI_COMM_WORLD);
+      MPI_Send(local_new, local_num, MPI_FLOAT, 0, 0, MPI_COMM_WORLD);
+      MPI_Send(&done, 1, MPI_INT, 0, 1, MPI_COMM_WORLD);
       //printf("Sent from process %d\n", my_rank);
 
     } else {
