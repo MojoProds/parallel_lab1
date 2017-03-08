@@ -291,7 +291,7 @@ int main(int argc, char *argv[]) {
 
       //printf("Still good ERROR CHECK\n");
 
-      int *temp;
+      int *temp = (float *) malloc(local_num * sizeof(float));
       int status;
 
       for(int p = 1; p < comm_sz; p++) {
