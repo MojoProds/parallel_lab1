@@ -158,6 +158,7 @@ void get_input(char filename[]) {
  */
 int within_error(float newVal, float oldVal) {
   float error = fabs((newVal - oldVal) / newVal);
+  printf("ERROR: %f\n", error);
   if(error <= err) {
     return 1;
   } else {
@@ -226,7 +227,6 @@ int main(int argc, char *argv[]) {
       //printf("Still good\n");
       counter = 0;
       for(int i = my_first_i; i < my_last_i; i++) {
-        //printf("X[%d] = %f\n", i, local_new[counter]);
         if(within_error(local_new[counter], x[i]) == 0) {
           break;
         }
