@@ -227,6 +227,7 @@ int main(int argc, char *argv[]) {
       //printf("Still good\n");
       counter = 0;
       for(int i = my_first_i; i < my_last_i; i++) {
+        printf("Process %d:\n", my_rank);
         if(within_error(local_new[counter], x[i]) == 0) {
           break;
         }
