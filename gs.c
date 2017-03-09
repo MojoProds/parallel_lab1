@@ -282,6 +282,7 @@ int main(int argc, char *argv[]) {
       //printf("Still good CALCS\n");
 
       for(int i = my_first_i; i < my_last_i; i++) {
+        printf("Process %d:\n", my_rank);
         if(within_error(new[i], x[i]) == 0) {
           break;
         }
