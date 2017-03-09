@@ -41,8 +41,7 @@ float calc_unknown(int unknown) {
     solution -= (a[index][j] * x[j]);
   }
 
-  solution = solution / a[index][index];
-  return solution;
+  return solution / a[index][index];
 }
 
 /* 
