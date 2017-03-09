@@ -342,8 +342,9 @@ int main(int argc, char *argv[]) {
 
   } while(all_done != 1);
 
+  printf("FINALIZING\n");
   MPI_Finalize();
-
+  printf("FINALIZED\n");
   /* Writing to the stdout */
   /* Keep that same format */
   for(int i = 0; i < num; i++) {
