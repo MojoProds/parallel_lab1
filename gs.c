@@ -245,8 +245,10 @@ int main(int argc, char *argv[]) {
 
       float replace[num];
 
-      MPI_Recv(replace, num, MPI_FLOAT, 0, 2, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+      //MPI_Recv(replace, num, MPI_FLOAT, 0, 2, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
+      MPI_Bcast(replace, num, MPI_FLOAT, 0, MPI_COMM_WORLD);
+      printf("Received broadcast!\n");
       for(int i = 0; i < num; i++) {
         x[i] = replace[i];
       }
@@ -318,6 +320,7 @@ int main(int argc, char *argv[]) {
       }
 
       MPI_Bcast(x, num, MPI_FLOAT, 0, MPI_COMM_WORLD);
+      printf("Broadcasting\n");
 
       //printf("Still good UPDATE X\n");
 
