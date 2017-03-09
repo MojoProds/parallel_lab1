@@ -158,7 +158,6 @@ void get_input(char filename[]) {
  */
 int within_error(float newVal, float oldVal) {
   float error = fabs((newVal - oldVal) / newVal);
-  printf("ERROR: %f\n", error);
   if(error > err) {
     return 0;
   } else {
@@ -227,7 +226,6 @@ int main(int argc, char *argv[]) {
       //printf("Still good\n");
       counter = 0;
       for(int i = my_first_i; i < my_last_i; i++) {
-        printf("Process %d:\n", my_rank);
         if(within_error(local_new[counter], x[i]) == 0) {
           break;
         }
@@ -282,11 +280,9 @@ int main(int argc, char *argv[]) {
       //printf("Still good CALCS\n");
 
       for(int i = my_first_i; i < my_last_i; i++) {
-        printf("Process %d:\n", my_rank);
         if(within_error(new[i], x[i]) == 0) {
           break;
         }
-        printf("PASS\n");
         if(i == my_last_i - 1) {
           procs_done[0] = 1;
         }
