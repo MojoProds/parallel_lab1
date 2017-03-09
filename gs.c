@@ -308,8 +308,8 @@ int main(int argc, char *argv[]) {
       for(int i = 0; i < num; i++) {
         x[i] = new[i];
         printf("New X[%d]: %f\n", i, x[i]);
-        printf("\n");
       }
+      printf("\n");
 
       MPI_Bcast(x, num, MPI_FLOAT, 0, MPI_COMM_WORLD);
 
