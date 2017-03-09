@@ -246,7 +246,6 @@ int main(int argc, char *argv[]) {
       float replace[num];
 
       MPI_Bcast(replace, num, MPI_FLOAT, 0, MPI_COMM_WORLD);
-      printf("Process %d received broadcast!\n", my_rank);
       for(int i = 0; i < num; i++) {
         x[i] = replace[i];
       }
@@ -313,26 +312,19 @@ int main(int argc, char *argv[]) {
       //printf("Still good RECVS\n");
 
       for(int i = 0; i < num; i++) {
-        printf("Received new[%d] = %f\n", i, new[i]);
         x[i] = new[i];
       }
 
       MPI_Bcast(x, num, MPI_FLOAT, 0, MPI_COMM_WORLD);
-      printf("Broadcasting\n");
-
-      //printf("Still good UPDATE X\n");
 
       for(int i = 0; i < comm_sz; i++) {
-        printf("Process %d done: %d\n", i, procs_done[i]);
         if(procs_done[i] == 0) {
           break;
         }
         if(i == comm_sz - 1) {
           all_done = 1;
-          printf("All done\n");
         }
       }
-      printf("Still good CHECK ALL DONE\n");
 
       MPI_Bcast(&all_done, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
@@ -343,9 +335,7 @@ int main(int argc, char *argv[]) {
 
   } while(all_done != 1);
 
-  printf("FINALIZING\n");
   MPI_Finalize();
-  printf("FINALIZED\n");
 
   if(my_rank == 0) {
     /* Writing to the stdout */
