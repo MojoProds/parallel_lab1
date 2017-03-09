@@ -334,7 +334,7 @@ int main(int argc, char *argv[]) {
           printf("All done\n");
         }
       }
-      //printf("Still good CHECK ALL DONE\n");
+      printf("Still good CHECK ALL DONE\n");
       nit++;
     }
 
