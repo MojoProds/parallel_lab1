@@ -157,9 +157,8 @@ void get_input(char filename[]) {
     Returns 0 otherwise
  */
 int within_error(float newVal, float oldVal) {
-  float error = fabs((newVal - oldVal) / newVal);
-  printf("ERROR: %f\n", error);
-  if(error > err) {
+  //printf("ERROR: %f\n", error);
+  if(fabs((newVal - oldVal) / newVal) > err) {
     return 0;
   } else {
     return 1;
