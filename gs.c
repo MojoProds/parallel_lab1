@@ -158,7 +158,7 @@ void get_input(char filename[]) {
  */
 int within_error(float newVal, float oldVal) {
   float error = fabs((newVal - oldVal) / newVal);
-  if(error < err) {
+  if(error <= err) {
     return 1;
   } else {
     return 0;
@@ -203,7 +203,6 @@ int main(int argc, char *argv[]) {
     /****OTHER PROCESSES****/
 
     if(my_rank != 0) {
-      //printf("Enter Process %d\n", my_rank);
       int done = 0;
 
       float *local_new = (float *) malloc(local_num * sizeof(float));
@@ -211,8 +210,6 @@ int main(int argc, char *argv[]) {
         printf("Cannot allocate local new!\n");
         exit(1);
       }
-
-      //printf("Still good\n");
 
       my_first_i = my_rank * local_num;
       my_last_i = (my_rank + 1) * local_num;
@@ -222,7 +219,7 @@ int main(int argc, char *argv[]) {
       for(int i = my_first_i; i < my_last_i; i++) {
         //printf("Still good %f\n", calc_unknown(i + 1));
         local_new[counter] = calc_unknown(i + 1);
-        //printf("Still good LOCAL %f\n", local_new[counter]);
+
         counter++;
       }
 
@@ -308,10 +305,9 @@ int main(int argc, char *argv[]) {
         procs_done[p] = status;
       }
 
-      //printf("Still good RECVS\n");
-
       for(int i = 0; i < num; i++) {
         x[i] = new[i];
+        printf("New X[%d]: %f\n", i, x[i]);
       }
 
       MPI_Bcast(x, num, MPI_FLOAT, 0, MPI_COMM_WORLD);
