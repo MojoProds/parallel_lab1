@@ -251,9 +251,7 @@ int main(int argc, char *argv[]) {
         x[i] = replace[i];
       }
 
-      if(done == 1) {
-        break;
-      }
+      MPI_Bcast(&all_done, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
     } else {
 
@@ -335,6 +333,9 @@ int main(int argc, char *argv[]) {
         }
       }
       printf("Still good CHECK ALL DONE\n");
+
+      MPI_Bcast(&all_done, 1, MPI_INT, 0, MPI_COMM_WORLD);
+
       nit++;
     }
 
