@@ -157,8 +157,9 @@ void get_input(char filename[]) {
     Returns 0 otherwise
  */
 int within_error(float newVal, float oldVal) {
-  //printf("ERROR: %f\n", error);
-  if(fabs((newVal - oldVal) / newVal) > err) {
+  float error = fabs((newVal - oldVal) / newVal);
+  printf("ERROR: %f\n", error);
+  if(error > err) {
     return 0;
   } else {
     return 1;
@@ -285,6 +286,7 @@ int main(int argc, char *argv[]) {
         if(within_error(new[i], x[i]) == 0) {
           break;
         }
+        printf("PASS\n");
         if(i == my_last_i - 1) {
           procs_done[0] = 1;
         }
