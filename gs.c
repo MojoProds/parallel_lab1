@@ -251,7 +251,9 @@ int main(int argc, char *argv[]) {
         x[i] = replace[i];
       }
 
-      //printf("Sent from process %d\n", my_rank);
+      if(done == 1) {
+        break;
+      }
 
     } else {
 
