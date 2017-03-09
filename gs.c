@@ -245,10 +245,8 @@ int main(int argc, char *argv[]) {
 
       float replace[num];
 
-      //MPI_Recv(replace, num, MPI_FLOAT, 0, 2, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-
       MPI_Bcast(replace, num, MPI_FLOAT, 0, MPI_COMM_WORLD);
-      printf("Received broadcast!\n");
+      printf("Process %d received broadcast!\n", my_rank);
       for(int i = 0; i < num; i++) {
         x[i] = replace[i];
       }
